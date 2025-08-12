@@ -77,10 +77,12 @@ public class classroomCheck extends JFrame {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String name = textField.getText();
+				String addText = "";
 				if(name.isEmpty()) {
 					for(Student st : classroom.Display()) {
-						textArea.setText(st.getName() + "\n");
+						addText = addText + "\n" +st.getName() ;						
 					}
+					textArea.setText(addText);
 				}
 			}
 		});
