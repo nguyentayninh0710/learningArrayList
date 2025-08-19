@@ -78,11 +78,26 @@ public class classroomCheck extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String name = textField.getText();
 				String addText = "";
+				boolean flag = false;
 				if(name.isEmpty()) {
 					for(Student st : classroom.Display()) {
 						addText = addText + "\n" +st.getName() ;						
 					}
 					textArea.setText(addText);
+				} else {
+					for(Student st : classroom.Display()) {
+						if(st.getName().equals(name)) {
+							flag = true;
+							addText = addText + "\n" +st.getName() ;
+						} 
+					}
+					
+					if(flag) {
+						textArea.setText(addText);
+					} else {
+						textArea.setText("Not found");
+					}
+				
 				}
 			}
 		});
@@ -90,6 +105,24 @@ public class classroomCheck extends JFrame {
 		contentPane.add(btnSearch);
 		
 		JButton btnRemove = new JButton("Remove");
+		btnRemove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String name = textField.getText();
+				if(name.isEmpty()) {
+					textArea.setText("Cannot remove empty variable!");
+				} else {
+					classroom.removeStudent(name);
+					
+//						if(st.getName().equals(name)) {
+//							classroom.removeStudent(name);
+//							textArea.setText("Remove success");
+//						} else {
+//							textArea.setText("No match to be removed");
+//						}
+//					
+				}
+			}
+		});
 		btnRemove.setBounds(327, 61, 117, 29);
 		contentPane.add(btnRemove);
 
